@@ -1,0 +1,5 @@
+myenv/
+backup/
+__pycache__/
+*.txt
+.env
