@@ -22,15 +22,21 @@ connection = ConnectHandler(**Cat8000v)
 #send cmd to router for show config
 output =  connection.send_command('show running-config')
 
-#use datetime to create time_stamp for our backpu config
+#use datetime to create time_stamp for our backup config
 backup_time  = datetime.datetime.now().strftime("%Y-%m-%d %H.%M.%S")
 
 #create file.txt with  our time-stamp that we created
 file_name = f"{backup_time}_config.txt"
 
-#adjust path for save at backup directory
-save_folder = "D:\\pythonWork\\NetworkAutomation\\backup"
+#find current path 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+#join backup to current directory
+save_folder = os.path.join(current_dir, "backup")
+#makedir if it does not exit and hadling error with exist_ok 
+os.makedirs(save_folder, exist_ok=True)
+#full path of directory to save txt file
 full_path = os.path.join(save_folder, file_name)
+
 
 
 #open file.txt for writing config output 
